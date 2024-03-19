@@ -62,6 +62,7 @@ Estudiante:
 Bonilla Castañeda Nestor Miguel - 2121192 
 Casales Crus Josue Jacob - 21211927
 Sotelo Rubio Rodrigo - 21212053 
+Flores Ramirez Emiliano Rafael - 20212404
 
 
 	</p>
