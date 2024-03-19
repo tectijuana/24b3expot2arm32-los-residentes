@@ -3,7 +3,7 @@
    Para comentarios usar este bloque para documentar pendientes, secuencias, etc.
 --->
 
-
+https://www.fceia.unr.edu.ar/~diegob/so/material/Llamadas_al_Sistema.pdf
 ![](https://s3.amazonaws.com/videos.pentesteracademy.com/videos/badges/low/arm-assembly.png)
 
 Borrar y modificar README
