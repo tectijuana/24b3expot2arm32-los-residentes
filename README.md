@@ -73,65 +73,76 @@ Flores Ramirez Emiliano Rafael - 20212404
 
 	<p align=left>
 
-Repositorio en el cual se desarrollaron distintos ejercicios en el lenguaje de 
-programacion c++, tomados del libro "Problemas para resolver con computadora" 
-1ra edicion (1985), por el autor Donald D. Spencer. 
+Introducción (3 mins)
 
-Los ejercicios corresponden al capitulo 6 del libro, entre las paginas 77 a 86.
-Se realizaron 25 problemas debido a la entrega fuera del limite de tiempo.
+Explicar los modos kernel y usuario en procesadores modernos:
+Modo kernel: Acceso sin restricciones a todas las instrucciones y funcionalidades del procesador. Aquí corre el núcleo del S.O.
+Modo usuario: Sólo un subconjunto de instrucciones están disponibles. Aquí corren los procesos de usuario.
+Rol del S.O. en administrar recursos y procesos:
+El S.O. es responsable de administrar los recursos del sistema (memoria, hardware, etc.)
+También gestiona los procesos que se ejecutan en el sistema.
+Necesidad de comunicación entre procesos y el núcleo:
+Los procesos necesitan solicitar recursos del S.O. (archivos, memoria, etc.)
+Debe existir un mecanismo de comunicación entre procesos y el núcleo del S.O.
+Llamadas al Sistema en Linux (10 mins)
 
-CONDICIONES:
+Definición de llamadas al sistema como interfaz con el kernel:
+Son funciones implementadas por el núcleo del S.O.
+Permiten a los procesos solicitar servicios y recursos del kernel.
+Cambio de modo usuario a kernel para ejecutarlas:
+El procesador alterna constantemente entre modos usuario y kernel.
+Las llamadas al sistema se ejecutan en modo kernel.
+Ejemplos de uso: acceso a archivos, manejo de memoria, dispositivos, etc.
+open/read/write para archivos y dispositivos
+Llamadas para asignar/liberar memoria
+Ejemplos de lectura de teclado, datos de /proc, etc.
+Mostrar ejemplos en C vs ensamblador:
+En C se usan funciones de librería que internamente hacen las llamadas.
+En ensamblador se usa la interrupción 0x80 y registros para parámetros.
+Analizar código de ejemplos:
+Ejemplo de lectura de archivo con open/read
+Obtener fecha/hora con gettimeofday
+Estadísticas del sistema con sysinfo
+Interrupciones de Entrada/Salida (5 mins)
 
-	EXTEMPORÁNEOS DE LA FECHA DE ENTREGA, despues del 25 de marzo y 1 segundo:
+Interrupciones de hardware para atender eventos de E/S:
+Los dispositivos generan interrupciones de hardware cuando necesitan atención.
+Señal asíncrona al procesador para atender el evento.
+Controladores de interrupción en el kernel:
+El kernel tiene controladores que manejan cada interrupción.
+Realizan las operaciones necesarias para el dispositivo (lectura, etc.)
+Ventajas de manejar E/S de forma asíncrona:
+Evita sondear continuamente los dispositivos.
+Mejora el rendimiento y eficiencia.
+Ejemplo de controlador de interrupción para leer desde teclado:
+Mostrar extracto de código del controlador del teclado.
+Explicar cómo atiende la interrupción y almacena los datos leídos.
+Mapeo de Periféricos en Memoria (4 mins)
 
-	-Solo 25 problemas a resolver y están en aleatorio las condiciones de uso, 
-		algunos simples otros de recordar, etc. CAPITULO 6 en adelante.
+Asignar regiones de memoria a registros de control de dispositivos:
+Direcciones de memoria son mapeadas a registros de E/S de los dispositivos.
+Mantener tablas de mapeo de direcciones:
+El kernel tiene tablas que asocian direcciones con puertos de E/S.
+Acceso eficiente a dispositivos de E/S desde kernel:
+El kernel accede a esas direcciones mapeadas para comunicarse con dispositivos.
+Evita instrucciones especiales de E/S.
+Ejemplo de mapeo de puertos para dispositivo de entrada:
+Código que obtiene dirección mapeada para puerto de teclado.
+Leer/escribir datos directamente en esa dirección.
+Otros Usos de Llamadas (2 mins)
 
-	-Agregar las indicaciones de los criterios de la rùbrica
-	
-RÚBRICA:
+Establecer/consultar límites de recursos con getrlimit/setrlimit
+Manipular cuotas de disco con quotactl
+Estadísticas de uso de recursos con getrusage
+Controlar asignación de memoria con mlock
+Resumen (1 min)
 
-        Todo problema es necesario siga el templete OBLIGATORIO para entregar el 
-		problema codificado, usted puede correr sus programas con su estilo 
-		pero ya que este funcionando, debe arreglarlo a presentación para su 
-		evaluación.
+Recapitular los conceptos clave:
+Llamadas al sistema como interfaz con el kernel
+Cambio de modos usuario/kernel
+Interrupciones para E/S asíncrona
+Mapeo de memoria para acceso eficiente a dispositivos
 
-        MODIFICAR LA PORTADA CON MARKDOWN Y ACTUALIZARLA, esta libre de cambiar 
-		todo.
-        Los archivos deben tener su extensión .CPP (no .txt, etc.)
-
-	Los problemas están en la relación siguiente:
-	
-	- 100% Sigue el templete proporcionado por el docente y corren 10 
-		Problemas (o si incremento en programas por supuesta dificultad) 
-		completamente en GITHUB Classroom (no repositorio personal),  los 
-		archivos deben tener su extensión .CPP (no .txt, .EXE, etc.) acomodados 
-		en dentro de un directorio  (sin acentos o simbolos) SOLO FUENTES, y 
-		modifica el README.md que sea una portada.
-	- 80% Sigue el templete proporcionado por el docente y corre 8 Problemas 
-		(o si incremento en programas por supuesta dificultad) completamente 
-		en GITHUB Classroom (no repositorio personal), los archivos deben 
-		tener su extensión .CPP (no .txt, etc.) acomodados en dentro de un 
-		directorio (sin acentos o simbolos) SOLO FUENTES, y modifica el 
-		README.md que sea una portada.
-	- 70% Sigue el templete proporcionado por el docente y corre 7 Problemas 
-		(o si incremento en programas por supuesta dificultad) completamente 
-		en GITHUB Classroom (no repositorio personal), los archivos deben 
-		tener su extensión .CPP (no .txt, etc.) acomodados en dentro de un 
-		directorio (sin acentos o simbolos) SOLO FUENTES, y modifica el 
-		README.md que sea una portada.
-	- 50 % EVITA Y NO USA el templete proporcionado por el docente sus Problemas 
-		(o si incremento en programas por supuesta dificultad) completamente 
-		en GITHUB Classroom (no repositorio personal) con mas de 7 problemas 
-		resueltos, los archivos NO tener su extensión .CPP y  puede o no estar 
-		acomodados en dentro de un directorio (sin acentos o simbolos) 
-		SOLO FUENTES, y modifica el README.md que sea una portada.
-
-ENTREGA:
-
-	URL del GitHub Classroom, y recuerde arreglar la PORTADA, quitar todos los 
-		elementos extras del templete, acomodarlo bien para su presentación 
-		solo lo necesario.
 
 	</p>
 
