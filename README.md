@@ -72,77 +72,33 @@ Flores Ramirez Emiliano Rafael - 20212404
 <pre>
 
 	<p align=left>
+**Introducción**
+		
+Las llamadas al sistema, las interrupciones y el mapeo de periféricos en memoria son conceptos fundamentales en el desarrollo de software y sistemas en Linux. Estos elementos son esenciales para entender cómo interactúan los programas con el núcleo del sistema operativo y cómo se gestionan los dispositivos de hardware. En esta presentación, exploraremos cada uno de estos temas en detalle para comprender su funcionamiento y su importancia en el contexto de Linux.
 
-Introducción (3 mins)
+**Llamadas al sistema en Linux**
 
-Explicar los modos kernel y usuario en procesadores modernos:
-Modo kernel: Acceso sin restricciones a todas las instrucciones y funcionalidades del procesador. Aquí corre el núcleo del S.O.
-Modo usuario: Sólo un subconjunto de instrucciones están disponibles. Aquí corren los procesos de usuario.
-Rol del S.O. en administrar recursos y procesos:
-El S.O. es responsable de administrar los recursos del sistema (memoria, hardware, etc.)
-También gestiona los procesos que se ejecutan en el sistema.
-Necesidad de comunicación entre procesos y el núcleo:
-Los procesos necesitan solicitar recursos del S.O. (archivos, memoria, etc.)
-Debe existir un mecanismo de comunicación entre procesos y el núcleo del S.O.
-Llamadas al Sistema en Linux (10 mins)
+Las llamadas al sistema son la interfaz entre los programas en el espacio de usuario y el núcleo del sistema operativo. Permiten a los programas solicitar servicios al sistema operativo, como la creación de procesos, la gestión de archivos, la comunicación con dispositivos de hardware, entre otros. En Linux, las llamadas al sistema se realizan mediante una interrupción de software, donde el programa solicita al núcleo que ejecute una rutina específica para llevar a cabo una determinada tarea.
 
-Definición de llamadas al sistema como interfaz con el kernel:
-Son funciones implementadas por el núcleo del S.O.
-Permiten a los procesos solicitar servicios y recursos del kernel.
-Cambio de modo usuario a kernel para ejecutarlas:
-El procesador alterna constantemente entre modos usuario y kernel.
-Las llamadas al sistema se ejecutan en modo kernel.
-Ejemplos de uso: acceso a archivos, manejo de memoria, dispositivos, etc.
-open/read/write para archivos y dispositivos
-Llamadas para asignar/liberar memoria
-Ejemplos de lectura de teclado, datos de /proc, etc.
-Mostrar ejemplos en C vs ensamblador:
-En C se usan funciones de librería que internamente hacen las llamadas.
-En ensamblador se usa la interrupción 0x80 y registros para parámetros.
-Analizar código de ejemplos:
-Ejemplo de lectura de archivo con open/read
-Obtener fecha/hora con gettimeofday
-Estadísticas del sistema con sysinfo
-Interrupciones de Entrada/Salida (5 mins)
+Es importante comprender las diferentes categorías de llamadas al sistema en Linux, que incluyen operaciones de archivos (como abrir, cerrar, leer y escribir), gestión de procesos (como crear, terminar y suspender procesos) y operaciones de red (como conectarse a través de sockets). Estas llamadas proporcionan acceso seguro y controlado a recursos del sistema, garantizando la estabilidad y la seguridad del sistema operativo.
 
-Interrupciones de hardware para atender eventos de E/S:
-Los dispositivos generan interrupciones de hardware cuando necesitan atención.
-Señal asíncrona al procesador para atender el evento.
-Controladores de interrupción en el kernel:
-El kernel tiene controladores que manejan cada interrupción.
-Realizan las operaciones necesarias para el dispositivo (lectura, etc.)
-Ventajas de manejar E/S de forma asíncrona:
-Evita sondear continuamente los dispositivos.
-Mejora el rendimiento y eficiencia.
-Ejemplo de controlador de interrupción para leer desde teclado:
-Mostrar extracto de código del controlador del teclado.
-Explicar cómo atiende la interrupción y almacena los datos leídos.
-Mapeo de Periféricos en Memoria (4 mins)
+En esta sección, exploraremos ejemplos concretos de llamadas al sistema en C, mostrando cómo se pueden utilizar en la práctica para realizar diversas tareas, desde la gestión de archivos hasta la comunicación en red.
 
-Asignar regiones de memoria a registros de control de dispositivos:
-Direcciones de memoria son mapeadas a registros de E/S de los dispositivos.
-Mantener tablas de mapeo de direcciones:
-El kernel tiene tablas que asocian direcciones con puertos de E/S.
-Acceso eficiente a dispositivos de E/S desde kernel:
-El kernel accede a esas direcciones mapeadas para comunicarse con dispositivos.
-Evita instrucciones especiales de E/S.
-Ejemplo de mapeo de puertos para dispositivo de entrada:
-Código que obtiene dirección mapeada para puerto de teclado.
-Leer/escribir datos directamente en esa dirección.
-Otros Usos de Llamadas (2 mins)
+**Interrupciones para operaciones de entrada/salida**
 
-Establecer/consultar límites de recursos con getrlimit/setrlimit
-Manipular cuotas de disco con quotactl
-Estadísticas de uso de recursos con getrusage
-Controlar asignación de memoria con mlock
-Resumen (1 min)
+Las interrupciones son señales asincrónicas que el hardware o el software pueden generar para indicar la necesidad de atención inmediata por parte del procesador. En el contexto de Linux, las interrupciones son fundamentales para gestionar operaciones de entrada/salida de dispositivos de hardware, como teclados, ratones, discos duros, etc.
 
-Recapitular los conceptos clave:
-Llamadas al sistema como interfaz con el kernel
-Cambio de modos usuario/kernel
-Interrupciones para E/S asíncrona
-Mapeo de memoria para acceso eficiente a dispositivos
+El kernel de Linux utiliza un sistema de manejo de interrupciones para responder a estas señales de manera eficiente y oportuna. Cuando un dispositivo de hardware necesita atención, genera una interrupción que detiene temporalmente la ejecución del programa en curso y activa un controlador de interrupciones específico en el kernel. Este controlador se encarga de procesar la interrupción, realizar la operación de entrada/salida necesaria y luego reanudar la ejecución del programa.
 
+Es esencial comprender cómo se utilizan las interrupciones para gestionar las operaciones de entrada/salida en Linux, ya que esto afecta directamente al rendimiento y la eficiencia del sistema. En esta sección, examinaremos en detalle cómo funciona este proceso, desde la generación de una interrupción por parte del hardware hasta la respuesta del kernel y la finalización de la operación de entrada/salida.
+
+**Mapeo de periféricos en memoria**
+
+El mapeo de periféricos en memoria es un mecanismo que permite a los dispositivos de hardware comunicarse directamente con la CPU y el software mediante el acceso a regiones específicas de la memoria del sistema. En Linux, los periféricos se pueden mapear en memoria para facilitar su acceso y control desde el espacio de usuario, lo que simplifica el desarrollo de controladores de dispositivos y aplicaciones que interactúan con hardware específico.
+
+El proceso de mapeo de periféricos implica asignar direcciones de memoria física a registros de control y datos en el dispositivo, lo que permite a los programas acceder a ellos como si fueran variables en la memoria del sistema. Esto proporciona una interfaz coherente y estandarizada para interactuar con diferentes dispositivos de hardware, independientemente de su fabricante o modelo.
+
+En esta sección, exploraremos cómo se realiza el mapeo de periféricos en memoria en Linux, incluyendo ejemplos prácticos de dispositivos comunes como puertos USB, tarjetas de red, etc. Mostraremos cómo acceder y controlar estos dispositivos desde el espacio de usuario utilizando técnicas de mapeo de memoria, lo que permite desarrollar aplicaciones más eficientes y flexibles.
 
 	</p>
 
