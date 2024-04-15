@@ -44,7 +44,7 @@ Departamento de Sistemas y Computación
 Ingeniería en Sistemas Computacionales
 
 Semestre:
-Febrero - Junio 2022
+Febrero - Junio 2024
 
 Materia:
 Lenguajes de interfaz
@@ -242,5 +242,22 @@ del dispositivo periférico
 
 
 
+ Sincronización de la E/S
 
+ Sincronización: mecanismos básicos
+ Las diferencias de velocidad entre la CPU y los periféricos de E/S, y la no
+previsibilidad previsibilidad del tiempo de respuesta respuesta de estos últimos, últimos, hace necesario necesario un
+mecanismo de sincronismo que permita coordinar adecuadamente las transferencias
+de datos entre ambas unidades
+ Antes de enviar/recibir enviar/recibir datos a/desde a/desde un periférico periférico hay que asegurarse asegurarse de que el
+dispositivo está preparado para realizar la transferencia, es decir, hay que
+sincronizarlo
+ Existen dos mecanismos básicos para sincronizar las operaciones de E/S con las de
+la CPU: sincronización por programa (E/S programada) y sincronización por
+interrupción
+ La E/S programada es la más sencilla de implementar, pero presenta el
+inconveniente de la pérdida de tiempo: el computador no realiza trabajo útil en el
+bucle de espera
+ La E/S por interrupción aprovecha mejor el tiempo de CPU, permitiendo la
+ejecución concurrente de un programa principal y la operación de E/S
 
