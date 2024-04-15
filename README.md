@@ -132,3 +132,115 @@ Comunicación entre procesos: solo se puede garantizar una interacción fluida e
 Windows y Linux: visión general de las llamadas al sistema
 La medida en que los tipos de llamadas al sistema enumerados se pueden implementar o realizar depende principalmente del hardware y de la arquitectura del sistema utilizados, pero también del sistema operativo. En Linux, por ejemplo, las llamadas al sistema se almacenan directamente en el núcleo de Linux en la “Tabla de llamadas al sistema”. Cada entrada de esta tabla tiene asignados un número único y una función específica que se ejecutará en el modo núcleo. Para ejecutar cualquier llamada al sistema Linux, se carga el número en la memoria de la CPU y después se carga mediante una interrupción de software 128 (llamada a una subfunción del sistema operativo que interrumpe la ejecución del programa en el modo de usuario).
 
+Estructura y funciones del sistema de E/S
+
+Características generales de los dispositivos periféricos
+ Los dispositivos periféricos presentan las siguientes características:
+ Tienen formas de funcionamiento muy diferentes entre sí, debido a las diferentes
+funciones que realizan y a los principios físicos en los que se basan
+ La velocidad de transferencia de datos es también diferente entre sí y diferente de la
+presentada por la CPU y la memoria
+ Suelen utilizar datos con formatos y longitudes de palabra diferentes
+ A pesar de sus diferencias, los dispositivos periféricos presentan las funciones comunes:
+ Necesidad de una identificación única del dispositivo por parte de la CPU
+ Capacidad de envío y/o recepción de datos
+ Sincronización de la transmisión, exigida por la diferencia de velocidad de los
+dispositivos dispositivos de E/S con la CPU
+
+Funciones básicas de los dispositivos periféricos
+ Las 3 funciones comunes de los dispositivos periféricos determinan su estructura básica:
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/5f477f79-bbfa-4ac2-aac9-38dda63e7f6b)
+
+Estas funciones básicas se pueden realizar a través del bus del sistema que conecta la
+memoria y la CPU, o bien se puede utilizar un bus específico para las operaciones de E/S
+Dispositivo periférico
+ecEC - IS
+memoria y la CPU, o bien se puede utilizar un bus específico para las operaciones de E/S
+ Estas alternativas se traducen en dos formas de organización de los espacios de direcciones
+
+Espacio de direcciones de E/S ( ) 1
+Dos alternativas:
+1) Espacio de direcciones unificado con el espacio de memoria
+ Existe un único bus al que se conectan los dispositivos de E/S y la memoria
+ La memoria y los di iti spositivos de E/S comparten el espacio de di i recc ones
+
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/8588a755-121b-47a1-af9b-12333c26d3d5)
+
+ En estos procesadores no existen instrucciones específicas de E/S
+)
+CPU Memoria de E/S 1 de E/S n
+ Se utilizan las instrucciones de referencia a memoria tipo load/store (lw/sw
+
+
+LOAD Ri, dir_E/S (CPU  Periférico)
+STORE Ri, dir E_ /S (Periférico  CPU)
+
+ Ejemplo: ARM
+Cada registro de un módulo de E/S es una dirección de memoria dentro de un rango
+reservado
+
+
+Espacio de direcciones de E/S (2)
+2) Espacio de direcciones independiente del de memoria (buses independientes)
+ Existen buses independientes para la memoria y los dispositivos de E/S
+
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/f6ca3a96-3af2-4571-b398-8077ef72759e)
+
+En estos procesadores sí existe un grupo de instrucciones específico para la E/S
+IN dir_E/S, Ri (CPU  Periférico)
+OUT Ri, di E r_ /S (P ifé i (Periférico  CPU)
+
+
+Ejemplo: Intel x86
+Cada registro de un módulo de E/S es un puerto
+
+
+Módulos de E/S y controladores
+ Para solventar la variedad de dispositivos periféricos, la unidad de E/S de un computador se
+organiza organiza en torno a dos tipos de elementos elementos:
+ Módulos de E/S: soportan las características comunes a muchos dispositivos
+ Controladores de dispositivo: son específicos para cada periférico
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/b39d9608-315c-49d4-8e44-0f9fc3675de2)
+
+ Los módulos de E/S permiten que el procesador gestione una amplia gama de dispositivos
+periféricos
+ El controlador se adapta a las peculiaridades específicas del periférico, actuando sobre
+elementos electromecánicos (impresoras de línea), sobre elementos ópticos (CD‐ROM), o
+magnéticos (discos), etc
+
+Estructura de un módulo de E/S
+ Se conecta al procesador a través de un conjunto de líneas de datos, dirección y control.
+ Los datos que se transfieren se almacenan temporalmente en un registro de datos.
+ El estado del módulo se refleja en los bits de un registro de estado.
+ El registro de control permite programar diferentes funciones en el módulo.
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/015a4706-630b-40f5-a8e0-885abd906586)
+
+Módulos de E/S serie y paralelo
+ La conexión entre módulo y dispositivo se puede realizar en forma serie o paralela
+ La E/S serie
+ Se emplea cuando módulo y dispositivo están a una distancia media o larga y el coste del
+medio de transmisión resulta importante
+ Utiliza una única línea de transmisión
+ La transmi iós n tiene lugar hi d ac en o que la línea ad i qu era sucesivamente a lo largo d l e
+tiempo el estado de cada uno de los bits constitutivos del mensaje
+ El tiempo asignado a cada bit determina la velocidad de transmisión en bits/segundo
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/f4fe2ec9-5826-4e0b-8315-56f40f436991)
+
+
+ La E/S paralela
+ Se utiliza para conectar módulos de E/S que se encuentran relativamente cerca
+del dispositivo periférico
+ Utiliza un conjunto de líneas por las que se transmiten en paralelo los bits del mensaje
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/c76b1695-20b5-48c0-89ae-32b7e345583a)
+
+
+
+
+
