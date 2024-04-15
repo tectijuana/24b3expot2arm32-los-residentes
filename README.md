@@ -115,6 +115,11 @@ Las system calls están estrechamente ligadas al modelo moderno de sistema opera
 
 El modo núcleo de mayor privilegio es aquí la instancia de control decisiva, porque, como mencionamos, en este no solo se ejecutan todos los servicios y procesos del sistema en sí, sino también las acciones críticas del sistema de los programas de aplicación que en el modo usuario están bloqueadas.
 
+</p>
+
+</pre>
+
+
 ¿Qué tipos de llamadas al sistema hay?
 En principio, como se dijo arriba, todas las llamadas al sistema se pueden utilizar como unidades de control para la comunicación entre los procesos de aplicación y el sistema operativo o el hardware. Además, las llamadas al sistema establecidas también se pueden clasificar en diferentes categorías, por lo que se han establecido en particular estos cinco tipos:
 
