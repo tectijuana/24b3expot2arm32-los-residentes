@@ -261,3 +261,78 @@ bucle de espera
  La E/S por interrupción aprovecha mejor el tiempo de CPU, permitiendo la
 ejecución concurrente de un programa principal y la operación de E/S
 
+
+
+
+
+
+
+ E/S programada
+
+Operación básica
+Cada vez que la CPU quiere realizar
+una transferencia:
+1. Entra en un bucle en el que lee
+l i d
+Leer el estado
+del módulo
+E/S  CPU
+una y otra vez el registro de
+estado del periférico (encuesta
+o “polling”) hasta que esté
+preparado para realizar la
+no
+i
+¿estado indica
+preparado?
+Bucle de
+sincronización
+preparado para realizar la
+transferencia
+2. Realiza la transferencia
+
+ ![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/eef7f17b-88f5-42b5-9783-d06ca7a7c1cf)
+
+ Problemas de la E/S programada
+ La CPU no hace trabajo útil durante el bucle de espera
+• Con dispositivos lentos el bucle podría repetirse miles/millones de veces
+ La dinámica del programa se detiene durante la operación de E/S
+• Ejemplo: Ejemplo: en un vídeo‐juego no se puede detener detener la dinámica dinámica del juego a
+espera que el usuario pulse una tecla
+ Dificultades para atender a varios periféricos
+• Mientras se espera a que un periférico esté listo para transmitir, no se puede
+atender a otro
+
+
+¿Hay margen de mej ?
+
+/S programada:
+Orden de
+lectura al
+módulo de E/S
+CPU  E/S
+ E/S programada:
+– El bucle de SINCRONIZACIÓN ejecuta
+instrucciones inútiles
+
+Leer el estado
+del módulo
+E/S  CPU
+ ¿Y si el dispositivo avisase a la CPU
+cuando haya terminado su operación?
+– La CPU podría hacer trabajo útil
+mientras el periférico hace la operación
+no ¿estado indica
+preparado?
+solicitada
+– Sólo tendría que retomar el control de
+la operación cuando el periférico
+hubiese terminado
+ Este mecanismo se denomina E/S por
+interrupciones
+
+![image](https://github.com/tectijuana/24b3expot2arm32-los-residentes/assets/158230637/8cf205d2-7ede-4748-aead-62bd755f8a82)
+
+
+
+
